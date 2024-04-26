@@ -38,7 +38,7 @@ app.get("/api/:date?", (req, res) => {
 
   let isDateValid = Date.parse(date);
 
-  let isUnixNumberVaild = /^[0-9]+$^/.test(date);
+  let isUnixNumberVaild = /^[0-9]+$/.test(date);
 
   let unixOutput = 0;
   let utcOutput = "";
@@ -49,7 +49,7 @@ app.get("/api/:date?", (req, res) => {
     return res.json({unix: unixOutput.valueOf(), utc: utcOutput});
   }
   else if (isNaN(isValidDate) && isUnixNumberVaild) {
-    unixOutput = new Date (date.parseInt());
+    unixOutput = new Date (parseInt(date));
     utcOutput = unixOutput.toUTCString();
     return res.json({unix: unixOutput.valueOf(), utc: utcOutput});
   }
