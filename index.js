@@ -31,7 +31,7 @@ var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-app.get("api/date?", (req, res) => {
+app.get("/api/:date?", (req, res) => {
   let date = req.params.date;
   
   let isDateEmpty = (date == null || date == "");
@@ -48,7 +48,7 @@ app.get("api/date?", (req, res) => {
     utcOutput = unixOutput.toUTCString();
     return res.json({unix: unixOutput.valueOf(), utc: utcOutput});
   }
-  else if (isUnixNumberVaild) {
+  else if (isNaN(isValidDate) && isUnixNumberVaild) {
     unixOutput = new Date (date.parseInt());
     utcOutput = unixOutput.toUTCString();
     return res.json({unix: unixOutput.valueOf(), utc: utcOutput});
